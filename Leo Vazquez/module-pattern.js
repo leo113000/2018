@@ -1,7 +1,5 @@
-
-const myRevealingModule = (function () {
-
-        // private function
+const fibonacciModule = (function () {
+         // private function
         function privateRecursiveFibonacci(value){
             if(value == 0 || value==1)
                return value;
@@ -20,3 +18,5 @@ const myRevealingModule = (function () {
             fibo: doFibonacci
         };
     })();
+
+    fibonacciModule.fibo(10);
