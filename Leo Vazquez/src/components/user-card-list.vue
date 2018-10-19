@@ -3,7 +3,7 @@
         <button @click="setMostrarSexo('todos')">Mostrar todos</button>
 		<button @click="setMostrarSexo('Hombre')">Mostrar Hombres</button>
 		<button @click="setMostrarSexo('Mujer')">Mostrar Mujeres</button>
-        <user-card @borrar="$emit('borrar', $event)" v-for="p in personasPorSexo" :persona="p" :key="p.id"></user-card>
+        <user-card @borrar="borrarPersona" v-for="p in personasPorSexo" :persona="p" :key="p.id"></user-card>
     </div>
 </template>
 
@@ -16,9 +16,12 @@
         components: {
 		    userCard
 	    },
-        props: ['personas'],
+        mounted () {
+            this.personas = JSON.parse(localStorage.getItem('people') || null ) || [];
+        },
         data: function() {
             return {
+                personas: [],
                 mostrarSoloSexo: 'todos'
             }
         },
@@ -31,6 +34,10 @@
             }
         },
         methods: {
+            borrarPersona(id){
+                this.personas = this.personas.filter( persona => persona.id !== id );
+                localStorage.setItem('people', this.personas);
+		    },
             setMostrarSexo(sexo){
                 this.mostrarSoloSexo = sexo;
             }

@@ -1,6 +1,6 @@
 <template>
     <div class="userForm">
-        
+        <error :errores="errores"/>
         <form>			
 			<input type="text" v-model="persona.nombre" placeholder="Nombre">
 			<input type="number" max=120 min=4 v-model="persona.edad" placeholder="Edad">
@@ -23,8 +23,12 @@
 </template>
 
 <script>
+import errorMessage from '@/components/error-message';
     export default {
         name: 'userForm',
+        components: {
+            error: errorMessage
+        },
         data: function() {
             return{
                 errores:[],
@@ -40,10 +44,10 @@
             nuevaPersona(){
                 if(this.camposValidos()){
                     this.persona.id++;
-                    this.$emit('nuevaPersona', Object.assign({}, this.persona));
+                    const people = JSON.parse(localStorage.getItem('people') || null) || [];
+                    people.push({...this.persona});
+                    localStorage.setItem('people', JSON.stringify(people));
                     this.vaciarCampos();
-                }else{
-                    this.$emit('hayErrores', Object.assign({}, this.errores));
                 }
             },
             camposValidos(){

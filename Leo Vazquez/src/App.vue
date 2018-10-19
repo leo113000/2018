@@ -30,18 +30,6 @@ export default {
 		title() {
 			return this.personas.length ? `Personas cargadas: ${this.personas.length}` : "No hay personas cargadas";
 		}
-	},
-	methods: {
-		agregar(persona){
-			this.erroresDeFormulario = [];
-			this.personas.push(persona);
-		},
-		agregarErrores(errores){
-			this.erroresDeFormulario = errores;
-		},
-		borrarPersona(id){
-			this.personas = this.personas.filter( persona => persona.id !== id );
-		}
 	}
 }
 </script>
