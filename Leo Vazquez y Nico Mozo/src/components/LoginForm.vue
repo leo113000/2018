@@ -1,12 +1,13 @@
 <template>
-    <el-form ref="login" :model="form" label-width="120px">
-        <el-form-item prop="username" label="Username" :rules="validations.username">
-            <el-input v-model="form.username"></el-input>
+    <el-form ref="login" :model="form">
+        <h2 class="login-message"> Login with your account! </h2>
+        <el-form-item prop="username" :rules="validations.username">
+            <el-input v-model="form.username" placeholder="Username"></el-input>
         </el-form-item>
-        <el-form-item prop="password" label="Password" :rules="validations.password">
-            <el-input v-model="form.password" type="password"></el-input>
+        <el-form-item prop="password" :rules="validations.password">
+            <el-input v-model="form.password" placeholder="Password" type="password"></el-input>
         </el-form-item>
-        <el-button type="primary" @click="onSubmit">Login</el-button>
+        <el-button class="social-button" type="primary" @click="onSubmit">Login</el-button>
     </el-form>
 </template>
 
@@ -49,3 +50,13 @@ export default {
     }
   }
 </script>
+<style>
+    h2.login-message {
+        margin: 30px 0 40px;
+        color: #666!important
+    }
+    .social-button {
+        margin-top: 30px;
+        width: 100%!important
+    }
+</style>

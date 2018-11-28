@@ -9,7 +9,7 @@
         <el-input v-model="form.title"></el-input>
       </el-form-item>
       <el-form-item prop="avgSalary" label="Salary" :rules="validations.avgSalary">
-        <el-input-number min="200" v-model="form.avgSalary" size="large" :step="200"></el-input-number>
+        <el-input-number :min="200" v-model="form.avgSalary" size="large" :step="200"></el-input-number>
       </el-form-item>
       <el-form-item prop="companyName" label="Company's Name" :rules="validations.companyName">
         <el-input v-model="form.companyName"></el-input>

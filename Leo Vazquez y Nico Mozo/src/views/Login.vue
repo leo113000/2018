@@ -48,9 +48,9 @@ export default {
 <style scoped>
 .home {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
-  background-image: url("../assets/board-1846972_1920.jpg");
+  background-image: url("../assets/building-1080592_1920.jpg");
   background-size: 100% auto;
   padding: 0;
   overflow: hidden;
@@ -59,19 +59,28 @@ export default {
   box-sizing: border-box;
   display: in;
   margin: 0;
-  border: 8px solid white;
 }
+
 .home .box-card{
   width: 400px;
-  margin-top: 40px;
+  height: 100vh;
+  border: 0;
+  padding: 40px;
+  border-radius: 0;
   display: table;
 }
 
 .home .box-card.message-add{
   width: 600px;
-  background-color: #444;
-  color: #ddd;
-  border: 0
+  height: auto;
+  margin: 40px 40px 40px;
+  background-color: rgba(54, 54, 54, 0.7);
+  color: #eee;
+  border: 0;
+}
 
+.home .box-card.message-add h2{
+  color: #fff;
+  margin-bottom: 40px!important;
 }
 </style>

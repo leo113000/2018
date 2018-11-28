@@ -23,19 +23,34 @@
       <span v-if="searchResults.length">
         <h4 class="result-h4"> Resultados de su busqueda </h4>
       </span>
-      <el-col class="wrapper-card" :span="8"  v-for="(item, index) in searchResults" :key="index">
-        <el-card class="box-card">
-          <div class="clicked-card" @click="selectItem(item)">
-            <div slot="header" class="clearfix">
-              <span>{{ item.title }}</span>
+      <el-row>
+        <el-col class="wrapper-card" :span="8"  v-for="(item, index) in searchResults" :key="index">
+          <el-card class="box-card">
+            <div class="clicked-card" @click="selectItem(item)">
+              <div slot="header" class="clearfix">
+                <h3>{{ item.title }}</h3>
+              </div>
+              <div class="text item">
+                <el-tag type="success" size="small" hit>
+                  <b><i class="el-icon-circle-check"></i> </b>{{ item.companyName }}
+                </el-tag>
+                <el-tag type="info" size="small" hit>
+                  <b><i class="el-icon-location"></i> </b>{{ item.location }}
+                </el-tag>
+                <el-tag type="warning" size="small" hit v-if="!item.avgSalary">
+                  <b><i class="el-icon-location"></i> </b> Salary Unknown
+                </el-tag>
+              </div>
+              <div class="description" v-if="item.description">
+                <p> {{ formatDescription(item.description.replace(/<[^>]*>/g, '')) }} </p>
+              </div>
+              <div class="salary" v-if="item.avgSalary">
+                <p> <b> <i class="el-icon-star-on" ></i>&nbsp;${{ item.avgSalary }}</b> / per year </p>
+              </div>
             </div>
-            <div class="text item">
-              <p><b>Company: </b>{{ item.companyName }}</p>
-              <p><b>Location: </b>{{ item.location }}</p>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
+          </el-card>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -94,6 +109,10 @@ export default {
       .then(function({ data }){
         this.searchResults = data;
       }.bind(this));
+    },
+    formatDescription (text) {
+      let sanitizedText = (text == null || text == undefined) ? "" : text
+      return sanitizedText.length > 220 ? sanitizedText.substr(0, 220) + "..." : sanitizedText 
     }
   },
   components: {
@@ -133,9 +152,55 @@ export default {
     opacity: 0.6
   }
 
+  .el-row {
+    display: flex;
+    flex-flow: wrap;
+    margin-bottom: 40px;
+  }
+
   .wrapper-card {
     padding: 20px;
     vertical-align: top
+  }
+
+  .wrapper-card .box-card {
+    text-align: left;
+
+  }
+
+  .wrapper-card .box-card .clearfix h3 {
+    color: #444!important;
+    font-size: 20px;
+    text-transform: capitalize!important;
+  }
+
+  .wrapper-card .box-card .el-tag {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .wrapper-card .box-card .text {
+    color: #555!important;
+  }
+
+  .wrapper-card .box-card .description {
+    color: #555!important;
+  }
+
+  .wrapper-card .box-card .salary {
+    color: #555!important;
+    font-size: 18px;
+  }
+
+  i.el-icon-star-on {
+    color: #ffd700
+  }
+
+  .wrapper-card .box-card .text i{
+    margin-right: 10px;
+    opacity: 0.4;
+    position: relative;
+    top:1px;
   }
 </style>
 
