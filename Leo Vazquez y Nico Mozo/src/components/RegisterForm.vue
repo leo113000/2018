@@ -42,9 +42,14 @@ export default {
       onSubmit() {
         this.$refs['register'].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            axios.post(URL + 'register', this.form)
+            .then((data) => {
+                this.$router.push({ path: '/' })
+            })
+            .catch((error) => {
+                this.$message.error('Register Error!');
+            });
           } else {
-            console.log('error submit!!');
             return false;
           }
         });

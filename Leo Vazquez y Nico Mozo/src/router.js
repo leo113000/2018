@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from './views/Login.vue'
 import Search from './views/Search.vue'
 import JobView from './views/JobView.vue'
+import NewJob from './views/NewJob.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,14 @@ const router = new Router({
       path: '/home',
       name: 'search',
       component: Search,
+      meta: {
+        loginRequired: true
+      }
+    },
+    {
+      path: '/new',
+      name: 'NewJob',
+      component: NewJob,
       meta: {
         loginRequired: true
       }
